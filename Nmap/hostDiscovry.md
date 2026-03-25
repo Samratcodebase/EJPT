@@ -34,4 +34,29 @@ By throwing all 4 probes at once, if any one gets a response, the host is marked
 
 If the target is on the same local subnet  
 [on same network], nmap skips all 4 of these entirely and just uses ARP.  
-[no firewall]
+[no firewall on layer 2]
+
+
+## Core Host Discovry Types
+Types           Commands   Default Ports
+ICMP (echo req)-> -PE         no port  
+ICMP TimeStamp -> -PP         no port
+TCP SYN PING      -PS         80,443
+TCP ACK PING      -PA         80
+UDP               -PU         40125
+SCTP INIT PING    -PY         132
+IP PROTOCOL PING  -PO         prot 1 ,2,4
+
+## TCP SYN PING [-PS]
+send a TCP SYN Ping to the Target !! if the Target is Alive it  response with SYN-ACK or RST both Conclude the host is Up.
+
+
+## TCP ACK PING  [-PA]
+sends a TCP ACK PING to the Target !!   IF the target is Alive it Responsed With RST , if not  Alive No response is there !!
+Some OS or FireWall Maybe Configired To Drop Random TCP ACK PING Cause it  Dont Fall into The HandShake Cycle !! 
+no TCP SYN PING
+
+## SCTP INIT PING [-PY] (Mostly Used in Telecom/Signaling)
+sends an SCTP INIT chunk , if the host is alive SENDS INI-ACK 
+
+##
